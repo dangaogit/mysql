@@ -2,7 +2,7 @@ import "reflect-metadata";
 import mysql from "mysql";
 import { MysqlMetadata, ExcuterSqlType } from "./metadata.constants";
 import { Bean, MysqlTableSymbol, ColumnType, MysqlClientColumnOption } from "./decorators";
-import { appLog } from "log";
+import { appLog } from "./log";
 import { LogOutputOption } from "@dangao/node-log";
 
 const log = appLog.getDeriveLog("Index");

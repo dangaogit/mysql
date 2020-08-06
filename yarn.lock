@@ -7,10 +7,10 @@
   resolved "https://registry.yarnpkg.com/@dangao/date-util-es/-/date-util-es-0.0.4.tgz#e3e89183aaf27bebc39165f3a708c49ad53495b0"
   integrity sha512-tkw7GwLOKDQJ/ZGHTNq7Dz1x2DWUTwqyy0j+PDr/xhKT2zlIFdq5ZIms1CpK/UGzsPaQ9/TooyT10FrrJO6Zvw==
 
-"@dangao/node-log@^0.1.3":
-  version "0.1.3"
-  resolved "https://registry.yarnpkg.com/@dangao/node-log/-/node-log-0.1.3.tgz#38262d85264d55c4b5581f8129a6a6688c55dc68"
-  integrity sha512-ev/w9jijD1bDtM8BB0by4tSFz1AclaUzfvdF6Fh7B30WTkE/UM6l3wqSqUe+AxXmoHWnOc2LfWk4bPId0IU16A==
+"@dangao/node-log@^0.1.6":
+  version "0.1.6"
+  resolved "https://registry.yarnpkg.com/@dangao/node-log/-/node-log-0.1.6.tgz#02661aa7f98b7cefffc4662c7e6540c28981f30a"
+  integrity sha512-OSCE5tz00GWmknD0mgK1B662yqNfc9Uvg0ZPnyagV6R6XSgoHy3jcLfoXRKmkgUUm6oKDPnmGpK7W9n2c2Occw==
   dependencies:
     "@dangao/date-util-es" "^0.0.4"
 
