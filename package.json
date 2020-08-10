@@ -1,6 +1,6 @@
 {
   "name": "@dangao/mysql",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "mysql conn util",
   "main": "dist/index.js",
   "repository": "https://github.com/dangaogit/mysql.git",
@@ -13,7 +13,7 @@
     "dist/*"
   ],
   "dependencies": {
-    "@dangao/node-log": "^1.0.0",
+    "@dangao/node-log": "^1.1.0",
     "@types/mysql": "^2.15.15",
     "mysql": "^2.18.1",
     "reflect-metadata": "^0.1.13"
