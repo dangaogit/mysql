@@ -36,12 +36,12 @@ export function Select(excuterOption: Omit<ExcuterSqlOption, "type">) {
     let resultList: any[] = [];
     let sqls: { sql: string; values?: any[] } = {
       sql,
-      values
+      values,
     };
     if (wheres) {
       const val = values[0];
       sqls = {
-        sql: sql + val
+        sql: sql + val,
       };
     }
     resultList = await conn.query("select", sqls, excuterOption.table || option.table);
@@ -59,7 +59,7 @@ export function Select(excuterOption: Omit<ExcuterSqlOption, "type">) {
 export interface InsertOption<T = Bean<any>> {
   tbName: string;
   bean: T;
-  insertKeys: string[];
+  insertKeys: (keyof T)[];
 }
 export function Insert(insertOption: InsertOption): <T>(target: T, propertyKey: keyof T) => void;
 export function Insert(sql: string): <T>(target: T, propertyKey: keyof T) => void;
@@ -73,7 +73,7 @@ export function Insert(par: string | InsertOption) {
         "insert",
         {
           sql,
-          values
+          values,
         },
         table
       );
@@ -86,10 +86,10 @@ export function Insert(par: string | InsertOption) {
           sql: `INSERT INTO ${insertOption.tbName} (??) VALUES ?`,
           values: [
             insertOption.insertKeys,
-            vals.map(o => {
-              return insertOption.insertKeys.map(key => o[key]);
-            })
-          ]
+            vals.map((o) => {
+              return insertOption.insertKeys.map((key) => o[key]);
+            }),
+          ],
         },
         table
       );
@@ -111,7 +111,7 @@ export function Update(par: string | UpdateOption) {
         "update",
         {
           sql,
-          values
+          values,
         },
         table
       );
@@ -119,7 +119,7 @@ export function Update(par: string | UpdateOption) {
       const updateOption = par;
       const obj: any = values[0];
       const kvs: any[] = [];
-      updateOption.wheres.forEach(k => {
+      updateOption.wheres.forEach((k) => {
         kvs.push(k);
         kvs.push(obj[k]);
         Reflect.deleteProperty(obj, k);
@@ -129,7 +129,7 @@ export function Update(par: string | UpdateOption) {
         "update",
         {
           sql: `UPDATE ${updateOption.tbName} SET ? WHERE ${updateOption.wheres.map(() => "?? = ?").join(" AND ")}`,
-          values: [obj, ...kvs]
+          values: [obj, ...kvs],
         },
         table
       );
@@ -144,7 +144,7 @@ export function Delete(sql: string) {
       "delete",
       {
         sql,
-        values
+        values,
       },
       table
     );
