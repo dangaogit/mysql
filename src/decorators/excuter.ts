@@ -56,15 +56,15 @@ export function Select(excuterOption: Omit<ExcuterSqlOption, "type">) {
   });
 }
 
-export interface InsertOption<T = Bean<any>> {
+export interface InsertOption<T extends Bean<any>> {
   tbName: string;
   bean: T;
-  insertKeys: (keyof T)[];
+  insertKeys: (keyof InstanceType<T>)[];
 }
-export function Insert(insertOption: InsertOption): <T>(target: T, propertyKey: keyof T) => void;
+export function Insert<T extends Bean<any>>(insertOption: InsertOption<T>): <T>(target: T, propertyKey: keyof T) => void;
 export function Insert(sql: string): <T>(target: T, propertyKey: keyof T) => void;
 
-export function Insert(par: string | InsertOption) {
+export function Insert<T extends Bean<any>>(par: string | InsertOption<T>) {
   return excuterFactory(async (option, ...values) => {
     const { conn, table } = option;
     if (typeof par === "string") {

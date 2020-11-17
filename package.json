@@ -1,6 +1,6 @@
 {
   "name": "@dangao/mysql",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "mysql conn util",
   "main": "dist/index.js",
   "repository": "https://github.com/dangaogit/mysql.git",
