@@ -80,6 +80,9 @@ export function Insert<T extends Bean<any>>(par: string | InsertOption<T>) {
     } else {
       const insertOption = par;
       const vals: any[] = values[0];
+      if (!vals.length) {
+        return;
+      }
       return conn.query(
         "insert",
         {
