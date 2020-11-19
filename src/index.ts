@@ -23,11 +23,13 @@ export interface MysqlClient {
 }
 
 export class MysqlClient {
+  public static log = appLog;
+
   private pool: mysql.Pool;
 
   constructor(config: string | mysql.PoolConfig, option: MysqlClientOption = {}) {
     this.pool = mysql.createPool(config);
-    if(option.log) {
+    if (option.log) {
       appLog.setOption(option.log);
       log.setOption(option.log);
     }
@@ -42,11 +44,11 @@ export class MysqlClient {
     this.pool.on("connection", () => {
       log.info("[connection]", "mysql-conn connection.");
     });
-    this.pool.on("enqueue", err => {
+    this.pool.on("enqueue", (err) => {
       err ? log.error("[enqueue]", JSON.stringify(err)) : log.warn("[enqueue]", "mysql-conn enqueue.");
       err && log.error("[enqueue]", err.stack);
     });
-    this.pool.on("error", err => {
+    this.pool.on("error", (err) => {
       log.error("[error]", JSON.stringify(err));
       log.error("[error]", err.stack);
     });
@@ -58,11 +60,7 @@ export class MysqlClient {
     // });
   }
 
-  public async query<BeanClass extends Bean<any> = Bean<any>>(
-    type: ExcuterSqlType,
-    option: MysqlClientQuery,
-    bean?: BeanClass
-  ): Promise<InstanceType<BeanClass>[] | number | undefined> {
+  public async query<BeanClass extends Bean<any> = Bean<any>>(type: ExcuterSqlType, option: MysqlClientQuery, bean?: BeanClass): Promise<InstanceType<BeanClass>[] | number | undefined> {
     if (!this.isBean(bean)) {
       throw `This bean is not MysqlTable bean!`;
     }
@@ -73,7 +71,7 @@ export class MysqlClient {
       conn.query(
         {
           sql,
-          values
+          values,
         },
         function (this: { sql: string }, err, result) {
           if (err) {
@@ -86,11 +84,11 @@ export class MysqlClient {
           log.info("[excuter]", this.sql);
 
           if (type === "select") {
-            result = (<any[]>result).map(item => {
+            result = (<any[]>result).map((item) => {
               const entry = Reflect.construct(bean, []);
               const columns = MysqlMetadata.column.getMetadata(entry, []);
 
-              columns.forEach(col => {
+              columns.forEach((col) => {
                 MysqlClient.packageColumn(entry, item, col);
               });
               return entry;
